@@ -21,7 +21,7 @@ public class ApplicationConfig {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(getApiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.orastays.mailserver.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.orastays.mail.mailserver.controller"))
                 .paths(PathSelectors.any())
                 .build();
     }

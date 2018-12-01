@@ -15,9 +15,9 @@ import org.springframework.stereotype.Component;
 import com.orastays.mail.mailserver.exceptions.FormExceptions;
 import com.orastays.mail.mailserver.helper.AuthConstant;
 import com.orastays.mail.mailserver.helper.MessageUtil;
+import com.orastays.mail.mailserver.helper.Util;
 import com.orastays.mail.mailserver.model.MailModel;
 
-import ch.qos.logback.classic.pattern.Util;
 
 @Component
 public class MailValidation extends AuthorizeUserValidation {
@@ -33,25 +33,26 @@ public class MailValidation extends AuthorizeUserValidation {
 	public void validateMail(MailModel mailModel) throws FormExceptions {
 
 		if (logger.isDebugEnabled()) {
-			logger.debug("validateSMS -- Start");
+			logger.debug("validateMail -- Start");
 		}
 
-	//	Util.printLog(mailModel, AuthConstant.INCOMING, "Send Email", request);
+		Util.printLog(mailModel, AuthConstant.INCOMING, "Send Email", request);
 		Map<String, Exception> exceptions = new LinkedHashMap<>();
 		if(Objects.nonNull(mailModel)) {
 			
 			// Validate Email Receiver 
-			if(StringUtils.isBlank(mailModel.getEmailReceiverId())) {
-				exceptions.put(messageUtil.getBundle("sms.message.null.code"), new Exception(messageUtil.getBundle("sms.message.null.message")));
+			if(StringUtils.isBlank(mailModel.getEmailId())) {
+				exceptions.put(messageUtil.getBundle("emailid.null.code"), new Exception(messageUtil.getBundle("emailid.null.message")));
 			}
 			
 			// Validate Email Body
-			if(StringUtils.isBlank(mailModel.getEmailBody())) {
-				exceptions.put(messageUtil.getBundle("sms.number.null.code"), new Exception(messageUtil.getBundle("sms.number.null.message")));
+			if(StringUtils.isBlank(mailModel.getMessageBody())) {
+				exceptions.put(messageUtil.getBundle("email.body.null.code"), new Exception(messageUtil.getBundle("email.body.null.message")));
 			}
+			
 			// Validate Email Body
-			if(StringUtils.isBlank(mailModel.getEmailSubject())) {
-				exceptions.put(messageUtil.getBundle("sms.number.null.code"), new Exception(messageUtil.getBundle("sms.number.null.message")));
+			if(StringUtils.isBlank(mailModel.getSubject())) {
+				exceptions.put(messageUtil.getBundle("email.subject.null.code"), new Exception(messageUtil.getBundle("sms.subject.null.message")));
 			}
 		}
 		
@@ -59,8 +60,7 @@ public class MailValidation extends AuthorizeUserValidation {
 			throw new FormExceptions(exceptions);
 		
 		if (logger.isDebugEnabled()) {
-			logger.debug("validateSMS -- End");
+			logger.debug("validateMail -- End");
 		}
 	}
-
 }

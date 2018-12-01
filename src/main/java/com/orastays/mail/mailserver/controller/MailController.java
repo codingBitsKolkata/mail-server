@@ -1,75 +1,96 @@
 package com.orastays.mail.mailserver.controller;
 
-import java.io.UnsupportedEncodingException;
-import java.util.Properties;
+import java.util.Map.Entry;
 
-import javax.websocket.Session;
+import javax.servlet.http.HttpServletRequest;
 
-import org.apache.logging.log4j.message.Message;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.MailSendException;
-import org.springframework.scheduling.annotation.Async;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
-import com.orastays.mail.mailserver.service.impl.SendMail;
+import com.orastays.mail.mailserver.exceptions.FormExceptions;
+import com.orastays.mail.mailserver.exceptions.MailSendException;
+import com.orastays.mail.mailserver.helper.AuthConstant;
+import com.orastays.mail.mailserver.helper.MessageUtil;
+import com.orastays.mail.mailserver.helper.Util;
+import com.orastays.mail.mailserver.model.MailModel;
+import com.orastays.mail.mailserver.model.ResponseModel;
+import com.orastays.mail.mailserver.service.MailService;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 
+@RestController
+@CrossOrigin(origins = "*")
+@RequestMapping("/api")
+@Api(value = "Email", description = "Rest API for Email", tags = "Email API")
 public class MailController {
 
-	@Autowired
-	private MessageQueryConfig messageUtil;
+	private static final Logger logger = LogManager.getLogger(MailController.class);
 	
 	@Autowired
-	private SmtpAuthenticator smtpAuthenticator;
+	private MailService mailService;
 	
-	@Async
-	public void send(String emailId, String messageBody, String subject) throws MailSendException {
+	@Autowired
+	private MessageUtil messageUtil;
+	
+	@Autowired
+	private HttpServletRequest request;
+	
+	@RequestMapping(value = "/send-mail", method = RequestMethod.POST, produces = "application/json")
+	@ApiOperation(value = "Send Email", response = ResponseModel.class)
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK"),
+			@ApiResponse(code = 201, message = "Please Try after Sometime!!!"),
+			@ApiResponse(code = 602, message = "Please provide Email Id"),
+			@ApiResponse(code = 603, message = "Please provide Email Body"),
+			@ApiResponse(code = 604, message = "Please provide Email Subject") })
+	public ResponseEntity<ResponseModel> sendMail(@RequestBody MailModel mailModel) {
 
-		String fromEmail = messageUtil.getBundle("fromEmail");//"mail@example.com";//
-		String port = messageUtil.getBundle("port");
-		
-		Properties props = new Properties();
-		
-		props.put("mail.smtp.host", "smtp.gmail.com");
-		props.put("mail.smtp.socketFactory.port", port);
-		props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-		props.put("mail.smtp.auth", "true");
-		props.put("mail.smtp.port", port);
+		if (logger.isInfoEnabled()) {
+			logger.info("sendMail -- START");
+		}
+
+		ResponseModel responseModel = new ResponseModel();
 
 		try {
+			mailService.sendMail(mailModel);
+			responseModel.setResponseBody(messageUtil.getBundle("email.send.success"));
+			responseModel.setResponseCode(messageUtil.getBundle(AuthConstant.COMMON_SUCCESS_CODE));
+			responseModel.setResponseMessage(messageUtil.getBundle(AuthConstant.COMMON_SUCCESS_MESSAGE));
+		} catch (FormExceptions fe) {
 
-			javax.mail.Message message = new MimeMessage(Session.getDefaultInstance(props, smtpAuthenticator));
-			//Message message = new MimeMessage(session);
-			BodyPart messageBodyPart = new MimeBodyPart();
-			
-			String htmlText = "";
-			String msgs = htmlText + messageBody;
-			String sysmail= "<br/><br/><br/><br/><br/>This is a system generated mail from PhillipPay. Please do not reply to this mail.";
-			msgs+= sysmail;
-			
-			messageBodyPart.setContent(msgs, "text/html");
-			
-			// Create a related multi-part to combine the parts
-			MimeMultipart multipart = new MimeMultipart("related");
-			multipart.addBodyPart(messageBodyPart);
-			message.setContent(multipart);
-						
-			try {
-				message.setFrom(new InternetAddress("no-reply@phillippay.com", fromEmail));
-			} catch (UnsupportedEncodingException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			for (Entry<String, Exception> entry : fe.getExceptions().entrySet()) {
+				responseModel.setResponseCode(entry.getKey());
+				responseModel.setResponseMessage(entry.getValue().getMessage());
+				break;
 			}
-			message.setRecipients(Message.RecipientType.TO,
-				InternetAddress.parse(emailId));
-			message.setSubject(subject);
-
-			Transport.send(message);
-
-			System.out.println("Mail Send");
-			
-		} catch (MessagingException e) {
+		} catch (MailSendException e) {
 			e.printStackTrace();
-			throw new MailSendException(e.getMessage());
-		}	
+			responseModel.setResponseBody(messageUtil.getBundle("email.send.failure"));
+			responseModel.setResponseCode(messageUtil.getBundle(AuthConstant.COMMON_ERROR_CODE));
+			responseModel.setResponseMessage(messageUtil.getBundle(AuthConstant.COMMON_ERROR_MESSAGE));
+		}
+
+		Util.printLog(responseModel, AuthConstant.OUTGOING, "Send Email", request);
+
+		if (logger.isInfoEnabled()) {
+			logger.info("sendMail -- END");
+		}
+		
+		if (responseModel.getResponseCode().equals(messageUtil.getBundle(AuthConstant.COMMON_SUCCESS_CODE))) {
+			return new ResponseEntity<>(responseModel, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(responseModel, HttpStatus.BAD_REQUEST);
+		}
 	}
 }

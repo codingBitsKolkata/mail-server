@@ -11,8 +11,9 @@ import lombok.ToString;
 @ToString
 public class MailModel {
 
-	private String emailBody;
-	private String emailSubject;
-	private String emailCC;
-	private String emailReceiverId;
+	private String emailId;
+	private String messageBody;
+	private String subject;
+	private String filePath;
+	private String fileName;
 }
