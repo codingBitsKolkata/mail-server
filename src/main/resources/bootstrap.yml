@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: mail-server
+  profiles:
+    active:
+    - dvl-phase1
+  cloud:
+    config: 
+      uri: http://localhost:7090
+      fail-fast: true
