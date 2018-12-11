@@ -11,12 +11,13 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @SpringBootApplication
 @EnableAsync
 @EnableResourceServer
 @EnableGlobalMethodSecurity(prePostEnabled=true)
-//@EnableEurekaClient
+@EnableDiscoveryClient
 public class MailServerApplication extends SpringBootServletInitializer {
 
 	public static void main(String[] args) {
