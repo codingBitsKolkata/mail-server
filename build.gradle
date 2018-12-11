@@ -37,7 +37,7 @@ dependencies {
 	compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-config', version: '1.4.3.RELEASE'
 	compile group: 'org.springframework.security', name: 'spring-security-jwt', version: '1.0.9.RELEASE'
 	compile group: 'org.springframework.boot', name: 'spring-boot-starter-freemarker', version: '1.5.15.RELEASE'
-	//compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-netflix-eureka-client', version: '1.4.5.RELEASE'
+	compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-netflix-eureka-client', version: '1.4.5.RELEASE'
 	compile group: 'org.springframework', name: 'spring-tx'
 	compileOnly('org.projectlombok:lombok')
 	
