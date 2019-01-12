@@ -1184,8 +1184,8 @@ public class Util {
 		
 		try {
 			
-			if (logger.isDebugEnabled()) {
-				logger.debug(type+" -- " + apiName +  " -- " + request.getRemoteAddr() + " -- " 
+			if (logger.isInfoEnabled()) {
+				logger.info(type+" -- " + apiName +  " -- " + request.getRemoteAddr() + " -- " 
 				+ new ObjectMapper().writeValueAsString(model) );
 			}
 			System.out.println(type+" -- " + apiName +  " -- " + request.getRemoteAddr() + " -- " 
