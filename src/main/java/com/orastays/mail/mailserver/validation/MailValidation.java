@@ -32,8 +32,8 @@ public class MailValidation extends AuthorizeUserValidation {
 	
 	public void validateMail(MailModel mailModel) throws FormExceptions {
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("validateMail -- Start");
+		if (logger.isInfoEnabled()) {
+			logger.info("validateMail -- Start");
 		}
 
 		Util.printLog(mailModel, AuthConstant.INCOMING, "Send Email", request);
@@ -59,8 +59,8 @@ public class MailValidation extends AuthorizeUserValidation {
 		if (exceptions.size() > 0)
 			throw new FormExceptions(exceptions);
 		
-		if (logger.isDebugEnabled()) {
-			logger.debug("validateMail -- End");
+		if (logger.isInfoEnabled()) {
+			logger.info("validateMail -- End");
 		}
 	}
 }

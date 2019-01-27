@@ -152,9 +152,9 @@ public class Util {
 
 	public static void saveHttpRequestDataInLogFile(HttpServletRequest request) {
 
-		if (logger.isDebugEnabled()) {
+		if (logger.isInfoEnabled()) {
 
-			logger.debug("saveHttpRequestDataInLogFile ::  " + request);
+			logger.info("saveHttpRequestDataInLogFile ::  " + request);
 
 		}
 
@@ -177,23 +177,23 @@ public class Util {
 				remoteUser = request.getRemoteUser();
 				requestUrl = request.getRequestURL().toString();
 
-				if (logger.isDebugEnabled()) {
+				if (logger.isInfoEnabled()) {
 
-					logger.debug("Request Data Follows -------> ");
-					logger.debug("Time Of API Hit :: " + milliseconds);
-					logger.debug("Remote Address :: " + remoteAddress);
-					logger.debug("Remote Host :: " + remoteHost);
-					logger.debug("Remote Port :: " + remotePort);
-					logger.debug("Remote User :: " + remoteUser);
-					logger.debug("Request URL ::  " + requestUrl);
+					logger.info("Request Data Follows -------> ");
+					logger.info("Time Of API Hit :: " + milliseconds);
+					logger.info("Remote Address :: " + remoteAddress);
+					logger.info("Remote Host :: " + remoteHost);
+					logger.info("Remote Port :: " + remotePort);
+					logger.info("Remote User :: " + remoteUser);
+					logger.info("Request URL ::  " + requestUrl);
 
 				}
 
 			} catch (Exception e) {
 
-				if (logger.isDebugEnabled()) {
+				if (logger.isInfoEnabled()) {
 
-					logger.debug("Exception In Receiving Request Data, Exception Message is :: " + e.getMessage());
+					logger.info("Exception In Receiving Request Data, Exception Message is :: " + e.getMessage());
 
 				}
 
@@ -201,9 +201,9 @@ public class Util {
 
 		} catch (Exception e) {
 
-			if (logger.isDebugEnabled()) {
+			if (logger.isInfoEnabled()) {
 
-				logger.debug("Exception In Receiving Request Data, Exception Message is :: " + e.getMessage());
+				logger.info("Exception In Receiving Request Data, Exception Message is :: " + e.getMessage());
 
 			}
 		}
