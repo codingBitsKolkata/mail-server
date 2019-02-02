@@ -14,14 +14,14 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @Configuration
 @EnableSwagger2
-public class ApplicationConfig {
+public class SwaggerConfig {
 
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(getApiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.orastays.mail.mailserver.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.orastays.mailserver.controller"))
                 .paths(PathSelectors.any())
                 .build();
     }
@@ -32,8 +32,8 @@ public class ApplicationConfig {
                 .title("Mail Server Dashboard")
                 .description("Mail Server Definition")
                 .version("1.0.0")
-                .license("Apache 2.0")
-                .licenseUrl("http://www.apache.org/licenses/LICENSE-2.0")
+                .license("OraStays 1.0")
+                .licenseUrl("http://www.orastays.com")
                 .contact(contact)
                 .build();
     }
