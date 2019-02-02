@@ -1,4 +1,4 @@
-package com.orastays.mail.mailserver.validation;
+package com.orastays.mailserver.validation;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -12,11 +12,11 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.orastays.mail.mailserver.exceptions.FormExceptions;
-import com.orastays.mail.mailserver.helper.AuthConstant;
-import com.orastays.mail.mailserver.helper.MessageUtil;
-import com.orastays.mail.mailserver.helper.Util;
-import com.orastays.mail.mailserver.model.MailModel;
+import com.orastays.mailserver.exceptions.FormExceptions;
+import com.orastays.mailserver.helper.AuthConstant;
+import com.orastays.mailserver.helper.MessageUtil;
+import com.orastays.mailserver.helper.Util;
+import com.orastays.mailserver.model.MailModel;
 
 
 @Component

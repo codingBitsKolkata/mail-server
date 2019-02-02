@@ -1,4 +1,4 @@
-package com.orastays.mail.mailserver.helper;
+package com.orastays.mailserver.helper;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;

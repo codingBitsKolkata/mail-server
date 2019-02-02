@@ -1,4 +1,4 @@
-package com.orastays.mail.mailserver.exceptions;
+package com.orastays.mailserver.exceptions;
 
 public class MailSendException extends Exception {
 

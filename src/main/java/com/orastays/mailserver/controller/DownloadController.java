@@ -2,7 +2,7 @@
  * @formatter:off
  *
  */
-package com.orastays.mail.mailserver.controller;
+package com.orastays.mailserver.controller;
 
 import java.io.BufferedInputStream;
 import java.io.File;

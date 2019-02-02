@@ -1,4 +1,4 @@
-package com.orastays.mail.mailserver.validation;
+package com.orastays.mailserver.validation;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

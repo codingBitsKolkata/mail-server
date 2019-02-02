@@ -1,4 +1,4 @@
-package com.orastays.mail.mailserver.service.impl;
+package com.orastays.mailserver.service.impl;
 
 import java.util.Properties;
 
@@ -24,13 +24,13 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Service;
 
-import com.orastays.mail.mailserver.exceptions.FormExceptions;
-import com.orastays.mail.mailserver.exceptions.MailSendException;
-import com.orastays.mail.mailserver.helper.MessageUtil;
-import com.orastays.mail.mailserver.helper.SmtpAuthenticator;
-import com.orastays.mail.mailserver.model.MailModel;
-import com.orastays.mail.mailserver.service.MailService;
-import com.orastays.mail.mailserver.validation.MailValidation;
+import com.orastays.mailserver.exceptions.FormExceptions;
+import com.orastays.mailserver.exceptions.MailSendException;
+import com.orastays.mailserver.helper.MessageUtil;
+import com.orastays.mailserver.helper.SmtpAuthenticator;
+import com.orastays.mailserver.model.MailModel;
+import com.orastays.mailserver.service.MailService;
+import com.orastays.mailserver.validation.MailValidation;
 
 @Service
 @Configuration

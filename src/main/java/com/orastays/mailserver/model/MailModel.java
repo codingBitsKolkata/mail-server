@@ -1,4 +1,4 @@
-package com.orastays.mail.mailserver.model;
+package com.orastays.mailserver.model;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

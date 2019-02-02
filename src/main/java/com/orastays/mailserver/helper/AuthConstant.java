@@ -1,4 +1,4 @@
-package com.orastays.mail.mailserver.helper;
+package com.orastays.mailserver.helper;
 
 public final class AuthConstant {
 

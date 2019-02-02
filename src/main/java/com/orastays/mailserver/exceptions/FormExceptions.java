@@ -1,4 +1,4 @@
-package com.orastays.mail.mailserver.exceptions;
+package com.orastays.mailserver.exceptions;
 
 import java.util.ArrayList;
 import java.util.HashMap;

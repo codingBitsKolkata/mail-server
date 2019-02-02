@@ -1,4 +1,4 @@
-package com.orastays.mail.mailserver.controller;
+package com.orastays.mailserver.controller;
 
 import java.util.Map.Entry;
 
@@ -15,14 +15,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.orastays.mail.mailserver.exceptions.FormExceptions;
-import com.orastays.mail.mailserver.exceptions.MailSendException;
-import com.orastays.mail.mailserver.helper.AuthConstant;
-import com.orastays.mail.mailserver.helper.MessageUtil;
-import com.orastays.mail.mailserver.helper.Util;
-import com.orastays.mail.mailserver.model.MailModel;
-import com.orastays.mail.mailserver.model.ResponseModel;
-import com.orastays.mail.mailserver.service.MailService;
+import com.orastays.mailserver.exceptions.FormExceptions;
+import com.orastays.mailserver.exceptions.MailSendException;
+import com.orastays.mailserver.helper.AuthConstant;
+import com.orastays.mailserver.helper.MessageUtil;
+import com.orastays.mailserver.helper.Util;
+import com.orastays.mailserver.model.MailModel;
+import com.orastays.mailserver.model.ResponseModel;
+import com.orastays.mailserver.service.MailService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
