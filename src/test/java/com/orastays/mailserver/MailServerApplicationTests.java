@@ -1,4 +1,4 @@
-package com.orastays.mail.mailserver;
+package com.orastays.mailserver;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
