@@ -32,7 +32,7 @@ import io.swagger.annotations.ApiResponses;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping("/api")
+//@RequestMapping("/api")
 @Api(value = "Email", description = "Rest API for Email", tags = "Email API")
 public class MailController {
 
